@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Espace exercices — RPS et QVCT (groupe Vinci)</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#02274F;--or:#FF9112;--vert:#14A071;--rouge:#C0392B;--bleu:#3E6A9E;--gris:#6B7C93;--fond:#F3F6FA;--pale:#DCE6F2}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Open Sans',system-ui,sans-serif;color:var(--navy);background:var(--fond);line-height:1.5}
+header{background:var(--navy);color:#fff;padding:14px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:5px solid var(--or)}
+header h1{font:700 17px 'Montserrat',sans-serif;margin:0;flex:1;min-width:200px}
+header a{color:#fff;font-size:13px;text-decoration:underline;cursor:pointer}
+main{max-width:860px;margin:0 auto;padding:18px}
+h2{font:700 22px 'Montserrat',sans-serif;margin:6px 0 4px}
+h3{font:700 16px 'Montserrat',sans-serif;margin:18px 0 6px}
+.k{color:var(--or);font:700 11px 'Montserrat',sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.card{background:#fff;border:1px solid var(--pale);border-left:5px solid var(--bleu);border-radius:10px;padding:14px 16px;margin:12px 0}
+.card.or{border-left-color:var(--or)}.card.vert{border-left-color:var(--vert)}.card.rouge{border-left-color:var(--rouge)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.menu a{display:block;background:#fff;border:1px solid var(--pale);border-radius:10px;padding:12px 14px;text-decoration:none;color:var(--navy);font-weight:600}
+.menu a small{display:block;font-weight:400;color:var(--gris)}
+button,.btn{background:var(--navy);color:#fff;border:0;border-radius:8px;padding:10px 16px;font:600 14px 'Open Sans',sans-serif;cursor:pointer}
+button.sec{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+button.or{background:var(--or);color:var(--navy)}
+button:disabled{opacity:.5;cursor:default}
+textarea,select,input[type=text]{width:100%;border:1.5px solid var(--pale);border-radius:8px;padding:9px;font:14px 'Open Sans',sans-serif;color:var(--navy);background:#fff}
+textarea{min-height:70px;resize:vertical}
+label{display:block;font-weight:600;font-size:14px;margin:10px 0 4px}
+.opt{display:block;width:100%;text-align:left;background:#fff;color:var(--navy);border:1.5px solid var(--pale);margin:6px 0;font-weight:400}
+.opt.ok{background:#E3F6EE;border-color:var(--vert)}.opt.ko{background:#FBE7E4;border-color:var(--rouge)}
+.pill{display:inline-block;padding:3px 10px;border-radius:99px;font:700 12px 'Montserrat',sans-serif;color:#fff;background:var(--bleu)}
+table{border-collapse:collapse;width:100%;font-size:13px;background:#fff}
+th{background:var(--navy);color:#fff;text-align:left;padding:7px}td{border:1px solid var(--pale);padding:6px;vertical-align:top}
+.note{color:var(--gris);font-size:12px}
+.bar{height:8px;background:var(--pale);border-radius:99px;overflow:hidden;margin:8px 0}.bar i{display:block;height:100%;background:var(--or)}
+.big{font:700 34px 'Montserrat',sans-serif;color:var(--or)}
+.warn{background:#FFF3E0;border:1px solid var(--or);border-radius:8px;padding:8px 12px;font-size:13px}
+@media(max-width:560px){table{font-size:12px}}
+</style></head>
+<body>
+<header><h1>RPS et QVCT · Espace exercices</h1><a href="#accueil">Menu</a></header>
+<main id="app"></main>
+<script>
+const D={"entree": [["Le stress est surtout…", ["un trait de caractère", "un déséquilibre ressenti entre les contraintes et les ressources", "une maladie professionnelle reconnue par un tableau", "un manque de motivation"], 1, "Le stress est un déséquilibre ressenti entre ce qui est demandé et les ressources disponibles ; les causes à traiter sont liées au travail."], ["Qui est légalement responsable de la prévention des risques, y compris psychosociaux ?", ["Le CSE", "Le médecin du travail", "L'employeur", "Chaque salarié seul"], 2, "L'employeur prend les mesures nécessaires pour protéger la santé physique et mentale (L. 4121-1)."], ["Laquelle est une famille de facteurs de RPS ?", ["Les exigences émotionnelles", "La couleur des locaux", "Le nombre de salariés", "Le type de contrat de mutuelle"], 0, "Six familles : intensité et temps de travail, exigences émotionnelles, autonomie, rapports sociaux, conflits de valeurs, insécurité."], ["Un signal faible est…", ["une preuve de harcèlement", "une petite variation à croiser avec d'autres signaux", "un indicateur légal obligatoire", "une sanction"], 1, "Isolé, il ne prouve rien : on le croise et on le vérifie."], ["La prévention primaire consiste à…", ["accompagner après un arrêt", "former au stress", "agir sur les causes pour éviter que le risque apparaisse", "écouter les salariés en difficulté"], 2, "Primaire = agir à la source (organisation, charge, management)."], ["Le CSE peut…", ["décider seul des mesures de prévention", "proposer des actions de prévention", "remplacer l'employeur dans l'évaluation des risques", "sanctionner un manager"], 1, "Le CSE contribue à l'analyse des risques et propose des actions (L. 2312-9) ; l'employeur décide."], ["La QVCT est…", ["un catalogue d'avantages", "une démarche qui associe qualité du travail et santé, avec la participation des salariés", "un autre nom du DUERP", "réservée aux grandes entreprises"], 1, "C'est une démarche participative qui s'appuie sur l'organisation du travail."], ["Quelle question est une question ouverte ?", ["Ça va ?", "Tu es stressé ?", "Comment ça se passe en ce moment ?", "Tu as un problème ?"], 2, "Une question ouverte invite à décrire le travail réel."], ["Qui conseille l'employeur, les salariés et les représentants sur la santé au travail ?", ["Le médecin du travail", "Le commissaire aux comptes", "Le comptable", "L'huissier"], 0, "Le médecin du travail conseille ; il est tenu au secret médical."], ["Une action de prévention utile doit avoir…", ["un slogan", "une cause visée, un responsable, une échéance, des moyens et un indicateur", "l'accord de tous les salariés", "un budget illimité"], 1, "Cinq critères : cause, responsable, échéance, moyens, indicateur (cf. L. 4121-3-1 pour le programme annuel)."]], "sortie": [["Parmi ces actions, laquelle est de prévention primaire ?", ["Une journée de gestion du stress", "Un numéro vert d'écoute", "La révision du planning pour réduire la surcharge", "Un accompagnement du retour après arrêt"], 2, "Elle agit sur la charge à la source."], ["Une journée de gestion du stress pour tous relève de la prévention…", ["primaire", "secondaire", "tertiaire", "aucune"], 1, "Elle outille les personnes ; elle ne traite pas les causes."], ["Un numéro vert d'écoute relève surtout de la prévention…", ["primaire", "secondaire", "tertiaire", "de la QVCT uniquement"], 2, "Il accompagne après la survenue des difficultés (il peut aussi aider au repérage précoce)."], ["« Deux collègues présents confirment les propos » est…", ["une hypothèse", "un fait rapporté", "un élément vérifié", "une qualification"], 2, "Ce qu'un témoin ou un document confirme est un élément vérifié."], ["Un salarié vous confie sa fatigue. Quelle réponse relève de l'écoute active ?", ["« Tout le monde est fatigué. »", "« Il faut te reprendre. »", "« Si je comprends bien, ça devient difficile de tenir le rythme ? »", "« Prends des vacances. »"], 2, "Reformuler sans juger ni minimiser."], ["Le médecin du travail…", ["rapporte à l'employeur ce que dit le salarié", "conseille et reste tenu au secret médical", "décide des sanctions", "remplace le RH"], 1, "Il conseille ; le secret médical s'impose."], ["Dans le modèle de Karasek, la situation « tendue » associe…", ["exigences faibles et latitude forte", "exigences fortes et latitude faible", "exigences faibles et latitude faible", "exigences fortes et latitude forte"], 1, "Exigences fortes + latitude décisionnelle faible = job strain."], ["Quel est un indicateur de moyens ?", ["L'absentéisme par unité", "Le nombre d'accidents du travail", "Le nombre de réunions d'équipe tenues", "Les départs avant un an"], 2, "Les moyens mesurent ce qui est réalisé ; les résultats mesurent l'effet."], ["D'après les principes généraux de prévention, on privilégie…", ["la protection individuelle avant la collective", "la protection collective avant l'individuelle", "la formation avant l'organisation", "l'écoute avant l'évaluation"], 1, "L. 4121-2 : mesures de protection collective en priorité."], ["Qu'ont en commun la prévention des RPS et la QVCT ?", ["Rien", "L'organisation du travail et le dialogue sur le travail réel", "Les avantages en nature", "Le médecin du travail uniquement"], 1, "Même point d'entrée : le travail réel ; même méthode : dialogue et indicateurs."]], "vf": [["Le stress est reconnu en maladie professionnelle par un tableau officiel", false, "Pas de tableau pour les affections psychiques : examen hors tableau (L. 461-1 al. 7 CSS)."], ["L'employeur doit prendre en compte les RPS dans l'évaluation des risques", true, "L. 4121-1 à L. 4121-3."], ["Une personne stressée est une personne fragile", false, "Le stress est un déséquilibre contraintes/ressources, à traiter à la source."], ["Pour prévenir les RPS, le plus efficace est de former les salariés à gérer leur stress", false, "L'action individuelle ne remplace pas la prévention des causes."], ["La QVCT, c'est la même chose que la prévention des RPS", false, "Les RPS sont une composante de la QVCT, plus large."], ["Un manager attentif peut à lui seul régler les RPS de son équipe", false, "Il agit sur ce qu'il maîtrise ; le reste est organisationnel."], ["Le CSE peut proposer des actions de prévention des RPS", true, "L. 2312-9."], ["Un signal faible isolé prouve qu'il y a un RPS", false, "Un signal se croise et se vérifie : faits ≠ hypothèses."]]};
+const $=s=>document.querySelector(s);
+const app=$('#app');
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function store(k,v){try{if(v===undefined){return JSON.parse(localStorage.getItem('rps_'+k)||'null')}localStorage.setItem('rps_'+k,JSON.stringify(v))}catch(e){return null}}
+
+const EX=[
+['positionnement','Questionnaire d’entrée','10 questions · 5 min · adapte la journée'],
+['vraifaux','Vrai ou faux ?','8 affirmations · jeu en îlot'],
+['quifaitquoi','Qui fait quoi ?','5 situations · rôles'],
+['atelier1','Atelier 1 · Facteurs de RPS','Dossier Hexaflux · grille 6 × 4'],
+['atelier2','Atelier 2 · Croiser les signaux','Fiche du cas · 3 constats'],
+['atelier3','Atelier 3 · Trois niveaux','5 actions à situer'],
+['jeudereles','Jeu de rôle à trois voix','Fiches de rôle · grille observateur'],
+['atelier4','Atelier 4 · Plan à 30 jours','3 initiatives QVCT'],
+['quizsortie','Quiz de sortie','10 questions · compte 10 points sur 20'],
+['casfinal','Cas final','Analyser, décider · compte 10 points sur 20'],
+['plan30j','Mon plan personnel','3 engagements'],
+['satisfaction','Satisfaction à chaud','10 items · 3 min'],
+];
+
+function head(k,t,sub){return `<div class="k">${k}</div><h2>${t}</h2>${sub?`<p class="note">${sub}</p>`:''}`}
+function back(){return `<p style="margin-top:22px"><a href="#accueil">← Retour au menu</a></p>`}
+
+/* ---------- Quiz générique ---------- */
+function quiz(id,title,list,sub,counts){
+  let i=0,score=0,answers=[];
+  function render(){
+    if(i>=list.length){
+      const pct=Math.round(score/list.length*100);
+      store(id,{score,total:list.length,date:new Date().toISOString()});
+      app.innerHTML=head('Résultat',title)+`<div class="card vert"><div class="big">${score} / ${list.length}</div>
+      <div class="bar"><i style="width:${pct}%"></i></div>
+      ${counts?`<p>Cela compte pour <b>${Math.round(score/list.length*10*10)/10} points sur 10</b> dans l’évaluation finale.</p>`:'<p>Ce résultat sert à adapter la journée : il ne vous note pas.</p>'}
+      <p class="note">Résultat enregistré sur cet appareil. Montrez cet écran à l’intervenant si demandé.</p></div>
+      <button onclick="location.reload()">Recommencer</button> `+back();return}
+    const q=list[i];
+    app.innerHTML=head('Question '+(i+1)+' / '+list.length,title,sub)+`<div class="bar"><i style="width:${i/list.length*100}%"></i></div>
+    <div class="card"><b>${esc(q[0])}</b><div id="o">${q[1].map((o,k)=>`<button class="opt" data-k="${k}">${esc(o)}</button>`).join('')}</div><div id="fb"></div></div>`;
+    app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+      const k=+b.dataset.k;app.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+      app.querySelectorAll('.opt')[q[2]].classList.add('ok');if(k!==q[2])b.classList.add('ko');else score++;
+      $('#fb').innerHTML=`<p><b>${k===q[2]?'Bonne réponse.':'Pas tout à fait.'}</b> ${esc(q[3])}</p><button id="nx">${i<list.length-1?'Suivante':'Voir mon résultat'}</button>`;
+      $('#nx').onclick=()=>{i++;render()};
+    });
+  }
+  render();
+}
+
+/* ---------- Vrai ou faux ---------- */
+function vraifaux(){
+  let i=0,score=0;
+  function render(){
+    if(i>=D.vf.length){app.innerHTML=head('Jeu',"Vrai ou faux ?")+`<div class="card vert"><div class="big">${score} / ${D.vf.length}</div><p>Comparez vos réponses avec celles de votre îlot, puis avec le corrigé de l'intervenant.</p></div><button onclick="location.reload()">Rejouer</button>`+back();return}
+    const q=D.vf[i];
+    app.innerHTML=head('Affirmation '+(i+1)+' / '+D.vf.length,'Vrai ou faux ?','Discutez 30 secondes en îlot, puis répondez.')+`<div class="bar"><i style="width:${i/D.vf.length*100}%"></i></div><div class="card or"><b style="font-size:17px">${esc(q[0])}</b>
+    <div style="display:flex;gap:10px;margin-top:14px"><button class="or" id="v">VRAI</button><button id="f" style="background:var(--rouge)">FAUX</button></div><div id="fb"></div></div>`;
+    const rep=v=>{$('#v').disabled=$('#f').disabled=true;const ok=v===q[1];if(ok)score++;
+      $('#fb').innerHTML=`<p><span class="pill" style="background:${ok?'var(--vert)':'var(--rouge)'}">${ok?'Bien vu':'Raté'}</span> La bonne réponse est <b>${q[1]?'VRAI':'FAUX'}</b>. ${esc(q[2])}</p><button id="nx">Suivante</button>`;$('#nx').onclick=()=>{i++;render()}};
+    $('#v').onclick=()=>rep(true);$('#f').onclick=()=>rep(false);
+  }
+  render();
+}
+
+/* ---------- Saisie générique avec sauvegarde locale + copie ---------- */
+function fields(id,list){
+  const saved=store(id)||{};
+  return list.map((f,i)=>`<label for="${id}${i}">${f}</label><textarea id="${id}${i}" data-id="${id}" data-i="${i}">${esc(saved[i]||'')}</textarea>`).join('')+
+  `<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"><button id="cp" class="sec">Copier mes réponses</button><span class="note" id="cpm" style="align-self:center">Sauvegarde automatique sur cet appareil.</span></div><textarea id="out" style="display:none;margin-top:8px" readonly></textarea>`;
+}
+function bindFields(id,labels){
+  document.querySelectorAll(`textarea[data-id="${id}"]`).forEach(t=>t.oninput=()=>{const s=store(id)||{};s[t.dataset.i]=t.value;store(id,s)});
+  $('#cp').onclick=async()=>{const txt=labels.map((l,i)=>l+'\n'+(($(`#${id}${i}`)||{}).value||'')).join('\n\n');
+    try{await navigator.clipboard.writeText(txt);$('#cpm').textContent='Copié : collez dans un message ou une note.'}catch(e){const o=$('#out');o.style.display='block';o.value=txt;o.select();$('#cpm').textContent='Sélectionnez et copiez le texte ci-dessous.'}};
+}
+
+/* ---------- Pages ---------- */
+const P={};
+P.accueil=()=>{app.innerHTML=head('Formation 1 jour · présentiel','Espace exercices en ligne','Tout est ici : rien à imprimer. Chaque diapositive d’exercice a son QR code qui ouvre directement la bonne page.')+
+`<div class="grid menu">${EX.map(e=>`<a href="#${e[0]}">${e[1]}<small>${e[2]}</small></a>`).join('')}</div>
+<div class="card or"><b>Confidentialité.</b> Vos réponses restent sur votre appareil (sauvegarde locale) : l’intervenant ne les reçoit pas automatiquement. Utilisez « Copier mes réponses » pour les conserver ou les partager. Les cas sont fictifs.</div>
+<p class="note">OSD Formation · Lyon · contact@osdformation.com</p>`};
+
+P.positionnement=()=>quiz('entree','Questionnaire d’entrée',D.entree,'Il sert à adapter la journée, pas à vous noter.',false);
+P.quizsortie=()=>quiz('sortie','Quiz de sortie',D.sortie,'Individuel · une seule réponse par question.',true);
+P.vraifaux=vraifaux;
+
+P.quifaitquoi=()=>{
+  const S=[
+   ['A','Un salarié dit ne plus dormir depuis le changement d’horaires de son équipe','Manager','RH, médecin du travail'],
+   ['B','Les arrêts courts doublent dans un service en six mois','Employeur / RH','CSE/CSSCT, managers'],
+   ['C','Un élu apprend qu’un collaborateur a été humilié devant l’équipe','Élu → employeur','RH, direction'],
+   ['D','Le DUERP n’a pas été mis à jour depuis la réorganisation','Employeur','CSE, managers'],
+   ['E','Une salariée souhaite parler à quelqu’un hors de la hiérarchie','RH ou médecin du travail','Dispositif d’écoute']];
+  const R=['Employeur','Manager','RH','CSE / CSSCT','Médecin du travail'];
+  app.innerHTML=head('Exercice · 8 minutes','Qui fait quoi ?','Pour chaque situation : le premier acteur à agir, puis un acteur à associer. Justifiez en une phrase.')+
+  S.map((s,i)=>`<div class="card"><span class="pill">${s[0]}</span> ${s[1]}<div class="grid"><div><label>Premier acteur</label><select>${['—'].concat(R).map(r=>`<option>${r}</option>`).join('')}</select></div><div><label>À associer</label><select>${['—'].concat(R).map(r=>`<option>${r}</option>`).join('')}</select></div></div><label>Une phrase de justification</label><input type="text"><div class="corr" style="display:none;margin-top:8px"><span class="pill" style="background:var(--vert)">Corrigé indicatif</span> Premier acteur : <b>${s[2]}</b> · à associer : <b>${s[3]}</b></div></div>`).join('')+
+  `<button id="rv" class="or">Voir le corrigé indicatif</button>`+back();
+  $('#rv').onclick=()=>{document.querySelectorAll('.corr').forEach(c=>c.style.display='block')};
+};
+
+const HEX_TEMOIGNAGES=[
+ ['Chef d’équipe, entrepôt','« Je suis chef d’équipe depuis six mois. Je n’ai pas eu de formation, je gère 25 personnes dont beaucoup d’intérimaires. Je rattrape les retards le soir. »'],
+ ['Conseillère, service client','« Le script est imposé : si je m’en écarte, on me le fait remarquer. Quand un client crie, je n’ai personne à qui en parler après l’appel. »'],
+ ['Planificatrice, transport','« Le nouveau logiciel plante et personne n’a le temps de nous former. On double les saisies à la main. »'],
+ ['Responsable RH','« Je suis arrivée il y a quatre mois. Je découvre des arrêts courts répétés dans l’entrepôt, mais je n’ai pas de chiffres par service. »'],
+];
+P.atelier1=()=>{
+  const fam=['Intensité et temps de travail','Exigences émotionnelles','Autonomie','Rapports sociaux','Conflits de valeurs','Insécurité'];
+  app.innerHTML=head('Atelier 1 · 35 minutes','Repérer les facteurs de RPS','En îlot : lisez le dossier, puis remplissez la grille. Formulez des conditions de travail, jamais des jugements sur des personnes.')+
+  `<div class="card"><h3 style="margin-top:0">Dossier · Hexaflux (entreprise fictive)</h3><p>Logistique e-commerce et service client. De 85 à 210 salariés en deux ans.</p>
+  <table><tr><th>Service</th><th>Effectif</th><th>À noter</th></tr><tr><td>Entrepôt</td><td>120</td><td>Deux équipes ; 41 intérimaires en moyenne en plus</td></tr><tr><td>Service client</td><td>25</td><td>Script imposé depuis 8 mois</td></tr><tr><td>Transport et planification</td><td>15</td><td>Nouveau logiciel déployé il y a 5 mois</td></tr><tr><td>Fonctions support</td><td>30</td><td>DRH arrivée il y a 4 mois</td></tr><tr><td>Encadrement de proximité</td><td>20</td><td>8 chefs d’équipe promus dans l’année, 1 seul formé</td></tr></table>
+  ${HEX_TEMOIGNAGES.map(t=>`<div class="card or"><b>${t[0]}</b><br>${t[1]}</div>`).join('')}
+  <p class="note">Entreprise, chiffres et témoignages fictifs, rédigés pour la formation.</p></div>
+  <h3>Votre grille : un fait du dossier + un levier pour chaque famille</h3><p class="note">Leviers : organisation et contenu du travail · relations et management · environnement physique · pouvoir d’agir, reconnaissance, parcours.</p>`+
+  fields('a1',fam.map(f=>f+' — fait du dossier, levier proposé'))+back();
+  bindFields('a1',fam);
+};
+P.atelier2=()=>{
+  const L=['Cinq indicateurs retenus (au moins deux croisés par unité)','Constat 1 (chiffré)','Constat 2 (chiffré)','Constat 3 (chiffré)','Faits encore à vérifier'];
+  app.innerHTML=head('Atelier 2 · 30 minutes','Croiser les signaux sur un cas','Distinguez faits rapportés, hypothèses et éléments vérifiés. Ne qualifiez pas les personnes.')+
+  `<div class="card"><h3 style="margin-top:0">Fiche du cas · Hexaflux (fictif)</h3><table><tr><th>Indicateur (12 derniers mois)</th><th>Entrepôt</th><th>Service client</th><th>Transport</th><th>Support</th></tr>
+  <tr><td>Arrêts de moins de 8 jours (nombre)</td><td>94</td><td>31</td><td>9</td><td>6</td></tr>
+  <tr><td>Accidents du travail</td><td>17</td><td>2</td><td>1</td><td>0</td></tr>
+  <tr><td>Départs avant un an d’ancienneté</td><td>38</td><td>9</td><td>2</td><td>1</td></tr>
+  <tr><td>Signalements reçus par les élus</td><td>3</td><td>6</td><td>1</td><td>0</td></tr>
+  <tr><td>Heures supplémentaires (moy./pers./mois)</td><td>9 h</td><td>4 h</td><td>11 h</td><td>3 h</td></tr></table>
+  <p class="note"><b>Données entièrement fictives créées pour l’exercice (À COMPLÉTER / REMPLACER par le dossier B OSD si vous préférez).</b> Les effectifs sont ceux du dossier de l’atelier 1.</p>
+  <div class="warn">Rappel : fait rapporté ≠ hypothèse ≠ élément vérifié.</div></div>`+fields('a2',L)+back();
+  bindFields('a2',L);
+};
+P.atelier3=()=>{
+  const A=[['A','Une journée de gestion du stress pour tous','Secondaire'],['B','La révision du planning du service client','Primaire'],['C','Un numéro vert d’écoute','Tertiaire'],['D','Une formation des chefs d’équipe à l’organisation de l’activité','Secondaire ou primaire'],['E','Un accompagnement du retour d’une salariée après un long arrêt','Tertiaire']];
+  app.innerHTML=head('Atelier 3 · 30 minutes','Situer cinq actions','Niveau de prévention, cause visée, puis reformulation pour la rendre primaire si possible.')+
+  A.map(a=>`<div class="card"><span class="pill">${a[0]}</span> <b>${a[1]}</b><label>Niveau</label><select><option>—</option><option>Primaire</option><option>Secondaire</option><option>Tertiaire</option></select><label>Cause visée / reformulation</label><textarea></textarea><div class="corr" style="display:none;margin-top:8px"><span class="pill" style="background:var(--vert)">Corrigé indicatif</span> ${a[2]}</div></div>`).join('')+
+  `<button id="rv" class="or">Voir le corrigé indicatif</button>`+back();
+  $('#rv').onclick=()=>{document.querySelectorAll('.corr').forEach(c=>c.style.display='block')};
+};
+P.jeudereles=()=>{
+  const crit=['Question ouverte posée','Reformulation','Absence de jugement ou de minimisation','Silence accepté','Suite proposée (temps dédié, relais)','Confidentialité rappelée'];
+  const sv=store('jr')||{};
+  app.innerHTML=head('Jeu de rôle · 20 minutes','Trois voix, deux tours','En trio mixte : celui qui aborde, le salarié, l’observateur. On change de rôle au deuxième tour. Cas fictif : ne jouez pas votre propre situation.')+
+  `<div class="card"><span class="pill">Rôle 1</span> <b>Celui qui aborde</b> (manager, RH ou élu)<p>Vous avez remarqué qu’une collaboratrice a multiplié les erreurs ces trois dernières semaines. Vous la croisez à la fin de la journée. <b>Objectif :</b> ouvrir l’échange, écouter, proposer une suite. Vous ne devez ni diagnostiquer ni promettre ce que vous ne pouvez pas tenir.</p></div>
+  <div class="card or"><span class="pill" style="background:var(--or);color:var(--navy)">Rôle 2</span> <b>Le salarié (Camille, conseillère service client, fictive)</b><p>Vous êtes fatiguée : depuis l’arrivée du nouveau script, vous enchaînez les appels difficiles sans pause. Vous hésitez à en parler. Vous vous confiez si on vous pose des questions ouvertes et qu’on vous écoute ; vous vous fermez si on vous juge ou si on vous donne des conseils trop vite. Vous ne dites pas tout d’un coup.</p></div>
+  <div class="card vert"><span class="pill" style="background:var(--vert)">Rôle 3</span> <b>L’observateur</b> — cochez ce que vous voyez, pas ce que vous pensez :
+  ${crit.map((c,i)=>`<label style="font-weight:400;display:flex;gap:8px;align-items:flex-start"><input type="checkbox" data-i="${i}" ${sv[i]?'checked':''}> ${c}</label>`).join('')}
+  <label>Un exemple entendu</label><textarea></textarea></div>
+  <p class="note">Débrief : d’abord ce qui a bien fonctionné, puis un point d’amélioration, puis ce que vous retenez pour le réel.</p>`+back();
+  document.querySelectorAll('input[type=checkbox]').forEach(c=>c.onchange=()=>{const s=store('jr')||{};s[c.dataset.i]=c.checked;store('jr',s)});
+};
+P.atelier4=()=>{
+  const L=[];for(let k=1;k<=3;k++)L.push('Initiative '+k+' — cause visée, action, responsable (côté employeur), échéance, moyens, indicateur de réalisation et d’effet');
+  app.innerHTML=head('Atelier 4 · 35 minutes','Trois initiatives, un plan à 30 jours','À partir des constats des ateliers 1 et 2. Une initiative par groupe de leviers au moins ; chacune testable à petite échelle.')+
+  `<div class="card or"><b>Les cinq critères d’une action utile :</b> vise une cause · a un responsable · a une échéance · a des moyens · se mesure.<br><span class="note">Le CSE propose ; l’employeur décide et met en œuvre.</span></div>`+fields('a4',L)+back();
+  bindFields('a4',L);
+};
+P.casfinal=()=>{
+  const L=['1. Analyse : facteurs et signaux repérés dans la situation (3 points)','2. Niveau de prévention et action à la source proposée (3 points)','3. Indicateur de réalisation et d’effet (2 points)','4. La première phrase que vous diriez à une personne en difficulté (2 points)'];
+  app.innerHTML=head('Évaluation finale · 20 minutes · individuel','Cas final','Nouveau terrain fictif. Formulez sur le travail, distinguez faits et hypothèses.')+
+  `<div class="card"><h3 style="margin-top:0">Logiserv (entreprise fictive)</h3><p>Plateforme de maintenance, 60 salariés. Il y a six mois : passage à un planning en 3×8, arrivée d’un nouveau directeur, deux démissions de techniciens expérimentés. Depuis : les arrêts courts passent de 6 % à 12 % des jours travaillés, trois techniciens disent « ne plus avoir le temps de bien faire », et un chef d’équipe confie à la RH que deux collègues ne se parlent plus. Le CSE n’a pas été consulté sur le planning. Il n’existe aucun dispositif d’écoute ni procédure écrite d’orientation.</p><p class="note">Données fictives créées pour l’évaluation.</p></div>`+fields('cf',L)+
+  `<p class="note">Barème : analyse 3 · prévention et action à la source 3 · indicateur 2 · phrase d’ouverture 2 = 10 points. Correction par l’intervenant avec la grille du guide formateur.</p>`+back();
+  bindFields('cf',L);
+};
+P.plan30j=()=>{
+  const L=['Pour mon équipe ou mon périmètre — une action, une date, un indicateur','Avec un autre acteur (employeur, RH, élus) — un échange à programmer, avec qui, quand','Pour moi — un repère ou une limite à tenir, à quelle date'];
+  app.innerHTML=head('Transfert · 10 minutes','Mon plan personnel à 30 jours','Trois engagements, chacun avec une date. Vous serez recontacté à 60-90 jours pour l’évaluation à froid (À CONFIRMER).')+fields('p30',L)+back();
+  bindFields('p30',L);
+};
+P.satisfaction=()=>{
+  const I=['Le contenu correspondait à mes attentes','Les thèmes étaient pertinents pour mon rôle','L’animation était claire et dynamique','Les méthodes (ateliers, jeu de rôle, cas) m’ont aidé à apprendre','Les supports et outils en ligne étaient utiles','Les conditions matérielles étaient adaptées','Je peux utiliser ce que j’ai appris dans mon travail','J’ai le sentiment d’avoir atteint les objectifs de la journée','Le rythme et la durée étaient adaptés','Appréciation globale'];
+  const sv=store('sat')||{};
+  app.innerHTML=head('Clôture · 3 minutes','Satisfaction à chaud','De 1 (pas du tout) à 10 (tout à fait). Anonyme pour l’analyse collective.')+
+  I.map((q,i)=>`<div class="card"><b>${i+1}. ${q}</b><select data-i="${i}"><option value="">—</option>${[1,2,3,4,5,6,7,8,9,10].map(n=>`<option ${sv[i]==n?'selected':''}>${n}</option>`).join('')}</select></div>`).join('')+
+  `<label>Points forts</label><textarea id="s1">${esc(sv.pf||'')}</textarea><label>Axes d’amélioration</label><textarea id="s2">${esc(sv.am||'')}</textarea>
+  <div class="card or" style="margin-top:14px"><button id="cp">Copier mes réponses</button> <span class="note" id="cpm">Sauvegarde automatique sur cet appareil.</span><textarea id="out" style="display:none;margin-top:8px" readonly></textarea><p class="note">Pour que l’intervenant reçoive vos réponses, utilisez la version Quizizz ou la fiche remise en fin de journée, ou collez votre copie dans un message à contact@osdformation.com.</p></div>`+back();
+  document.querySelectorAll('select[data-i]').forEach(s=>s.onchange=()=>{const v=store('sat')||{};v[s.dataset.i]=s.value;store('sat',v)});
+  $('#s1').oninput=e=>{const v=store('sat')||{};v.pf=e.target.value;store('sat',v)};$('#s2').oninput=e=>{const v=store('sat')||{};v.am=e.target.value;store('sat',v)};
+  $('#cp').onclick=async()=>{const txt=I.map((q,i)=>(i+1)+'. '+q+' : '+((document.querySelector(`select[data-i="${i}"]`)||{}).value||'—')).join('\n')+'\nPoints forts : '+$('#s1').value+'\nAxes d’amélioration : '+$('#s2').value;
+    try{await navigator.clipboard.writeText(txt);$('#cpm').textContent='Copié.'}catch(e){const o=$('#out');o.style.display='block';o.value=txt;o.select();$('#cpm').textContent='Copiez le texte ci-dessous.'}};
+};
+
+function route(){const h=(location.hash||'#accueil').slice(1);(P[h]||P.accueil)();window.scrollTo(0,0)}
+addEventListener('hashchange',route);route();
+</script></body></html>
